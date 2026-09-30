@@ -15,6 +15,10 @@ public class Handle {
                         command_forecast forecast = new command_forecast();
                         forecast.execute(scanner);
                         break;
+                    case "/stats":
+                        //command_stats stats = new command_stats();
+                        //stats.execute(scanner);
+                        break;
                     case "/help":
                         System.out.println("Функционал бота включает в себя несколько команд:\n1. /forecast - показ погоды на запрошенный день недели (предел - 1 неделя вперёд)\n2. /stats - осадки, температура и погодные условия в целом на момент запроса\n3. /help - показ существующих команд и их краткое описание\n4. /exit - завершение работы ");
                         break;

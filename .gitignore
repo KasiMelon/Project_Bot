@@ -23,6 +23,7 @@ Thumbs.db
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
-
+target/
+.vscode/
 # Windows shortcuts
 *.lnk
