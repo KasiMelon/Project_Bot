@@ -9,7 +9,7 @@
 *.jar
 *.war
 *.ear
-
+*.env
 # Virtual machine crash logs
 hs_err_pid*
 replay_pid*
@@ -23,6 +23,7 @@ Thumbs.db
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
-
+target/
+.vscode/
 # Windows shortcuts
 *.lnk
