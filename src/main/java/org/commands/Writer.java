@@ -5,6 +5,9 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * класс, отвечающий за коррекный вывод запрашиваемой информации пользователю
+ */
 public class Writer {
     private static final Logger logger = LoggerFactory.getLogger(Writer.class);
     private final String city;

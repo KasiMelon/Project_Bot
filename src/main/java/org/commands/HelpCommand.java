@@ -5,6 +5,11 @@ import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * класс отвечает за обработку команды /help
+ * метод Match сравнивает введёный текст с /help
+ * метод execute выводит полезную информацию для пользователя
+ */
 public class HelpCommand implements CommandExecute {
     private static final Logger logger = LoggerFactory.getLogger(HelpCommand.class);
 

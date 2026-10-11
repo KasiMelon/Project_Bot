@@ -9,6 +9,10 @@ import org.slf4j.Logger;
 public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
+    /**
+     * основная часть кода, отвечающая за взаимодействие с пользователем
+     * @param args
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Добро пожаловать в чат бот прогноза погоды");

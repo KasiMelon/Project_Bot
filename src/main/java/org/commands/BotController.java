@@ -6,6 +6,9 @@ import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * данный класс принимает ввод пользователя и решает какое действие нужно выполнить
+ */
 public class BotController {
     private static final Logger logger = LoggerFactory.getLogger(BotController.class);
     private final List<CommandExecute> commands = List.of(

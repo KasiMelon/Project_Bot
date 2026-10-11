@@ -24,6 +24,12 @@ import org.slf4j.LoggerFactory;
 public class Weather {
     private static final Logger logger = LoggerFactory.getLogger(Weather.class);
 
+    /**
+     *формируется HTTP запрос на сервер ApiWeather
+     * @param encodedCity запрашиваемый город
+     * @param daysToRequest количество дней
+     * @return
+     */
     public static HttpResponse<String> Api(String encodedCity, int daysToRequest) {
         Dotenv dotenv = Dotenv.load();
         String apiKey = dotenv.get("ApiWeather");
@@ -49,6 +55,11 @@ public class Weather {
         return null;
     }
 
+    /**
+     * метод запрашивает город у пользователя
+     * @param scanner
+     * @return
+     */
     public static String getEncodingCity(Scanner scanner) {
         System.out.println("Введите город: ");
         String city;
@@ -58,6 +69,11 @@ public class Weather {
         return encodedCity;
     }
 
+    /**
+     * метод запрашивает количество дней для прогноза погоды
+     * @param scanner
+     * @return
+     */
     public static int getDaysToRequest(Scanner scanner) {
         while (true) {
             System.out.print("На сколько дней нужен будет прогноз? (0 - на сегодня, максимум на 7 дней): ");
@@ -77,6 +93,10 @@ public class Weather {
         }
     }
 
+    /**
+     * формируется ответ по полученной информации
+     * @param response
+     */
     public static void output(HttpResponse<String> response) {
         if (response.statusCode() == 200) {
             logger.debug("Успешно получен ответ от сервера {}", response);
@@ -101,7 +121,9 @@ public class Weather {
             Writer writer = new Writer(city, avgTemp, humidity, conditionText, date);
             System.out.println(writer);
             logger.info("Чат-бот успешно вывел запрашиваемые данные");
-
+/**
+ * обработка возникших ошибок
+ */
         } else if (response.statusCode() == 400 || response.statusCode() == 404) {
             logger.error("Введено неверное название города");
             System.out.println("Вы ввели некорректное название города, перепроверьте его и введите снова");
