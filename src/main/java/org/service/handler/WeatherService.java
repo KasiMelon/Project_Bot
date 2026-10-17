@@ -2,13 +2,11 @@ package org.service.handler;
 
 import java.net.URLEncoder;
 import java.net.http.HttpResponse;
-
+import org.ui.WriterUI;
 import java.nio.charset.StandardCharsets;
 
 import org.model.apiWeather.ApiWeather;
 import org.ui.ConsoleCommandUI;
-
-import org.ui.Writer;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -70,7 +68,7 @@ public class WeatherService {
      * формируется ответ по полученной информации
      * @param response
      */
-    public static void output(HttpResponse<String> response) {
+    public static WriterUI output(HttpResponse<String> response) {
         if (response.statusCode() == 200) {
             logger.debug("Успешно получен ответ от сервера {}", response);
 
@@ -91,18 +89,19 @@ public class WeatherService {
             JSONObject condition = day.getJSONObject("condition");
             String conditionText = condition.getString("text");
 
-            Writer writer = new Writer(city, avgTemp, humidity, conditionText, date);
-            System.out.println(writer);
-            logger.info("Чат-бот успешно вывел запрашиваемые данные");
-/**
+            WriterUI writerUI = new WriterUI(city, avgTemp, humidity, conditionText, date);
+            return writerUI;
+            /**
  * обработка возникших ошибок
  */
         } else if (response.statusCode() == 400 || response.statusCode() == 404) {
             logger.error("Введено неверное название города");
             ConsoleCommandUI.IncorrectCity();
+            return null;
         } else {
             logger.error("Возникла неполадка {}", response.statusCode());
             ConsoleCommandUI.Error();
+            return null;
         }
     }
 }

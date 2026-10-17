@@ -39,4 +39,7 @@ public class ConsoleCommandUI extends ConsoleUI {
     public static void NetworkError() {
         System.out.println("Возникла ошибка при установлении связи");
     }
+    public static void CommandResult(WriterUI writerUI){
+        System.out.println(writerUI);
+    }
 }

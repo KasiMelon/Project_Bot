@@ -3,6 +3,7 @@ package org.service.commands;
 
 import org.service.handler.WeatherService;
 import org.model.apiWeather.ApiWeather;
+import org.ui.ConsoleCommandUI;
 
 /**
  * StatsCommand реализует вывод прогноза погоды на текущий день.
@@ -19,6 +20,6 @@ public class StatsCommand implements Command {
         ApiWeather apiWeather = new ApiWeather();
         String encodedCity = weatherUI.getEncodingCity();
         int daysToRequest = 1;
-        WeatherService.output(apiWeather.Api(encodedCity, daysToRequest));
+        ConsoleCommandUI.CommandResult(WeatherService.output(apiWeather.Api(encodedCity, daysToRequest)));
     }
 }

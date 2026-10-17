@@ -6,15 +6,15 @@ import org.slf4j.LoggerFactory;
 /**
  * Класс, отвечающий за коррекный вывод запрашиваемой информации пользователю.
  */
-public class Writer {
-    private static final Logger logger = LoggerFactory.getLogger(Writer.class);
+public class WriterUI {
+    private static final Logger logger = LoggerFactory.getLogger(WriterUI.class);
     private final String city;
     private final double avgTemp;
     private final double humidity;
     private final String conditionText;
     private final String date;
 
-    public Writer(String city, double avgTemp, double humidity, String conditionText, String date) {
+    public WriterUI(String city, double avgTemp, double humidity, String conditionText, String date) {
         this.city = city;
         this.avgTemp = avgTemp;
         this.humidity = humidity;
