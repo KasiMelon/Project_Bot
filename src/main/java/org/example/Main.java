@@ -2,37 +2,25 @@ package org.example;
 
 import java.util.Scanner;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.commands.BotController;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.telegram.telegrambots.longpolling.TelegramBotsLongPollingApplication;
 
 public class Main {
-    private static final Logger logger = LoggerFactory.getLogger(Main.class);
-
-    /**
-     * основная часть кода, отвечающая за взаимодействие с пользователем
-     * @param args
-     */
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Добро пожаловать в чат бот прогноза погоды");
-        System.out.println("Для старта чат бота введите команду /start: ");
-        String userChoice = scanner.nextLine();
-        BotController botController = new BotController();
-        while (true) {
-            if (userChoice.equals("/start")) {
-                do {
-                    System.out.println("Функционал данного чат бота: /forecast, /stats, /help, /exit ");
-                    userChoice = scanner.nextLine();
-                    botController.handleUserChoice(userChoice, scanner);
-                } while (!userChoice.toLowerCase().equals("/exit"));
-                return;
+        Dotenv dotenv = Dotenv.load();
+        String apiBot = dotenv.get("TELEGRAM_BOT_TOKEN");
 
-            } else {
-                logger.error("Команда на старт не распознана {}", userChoice);
-                System.out.println("Вы ввели некорректную команду. Запустите чат-бот снова и введите /start");
-                return;
-            }
+        try (TelegramBotsLongPollingApplication botsApplication = new TelegramBotsLongPollingApplication()) {
+
+            botsApplication.registerBot(apiBot, new CommandBot(apiBot));
+            System.out.println("Бот успешно заработал");
+
+            Thread.currentThread().join();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

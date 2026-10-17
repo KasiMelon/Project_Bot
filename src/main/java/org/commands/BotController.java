@@ -1,7 +1,6 @@
 package org.commands;
 
 import java.util.List;
-import java.util.Scanner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,20 +14,21 @@ public class BotController {
             new ForecastCommand(),
             new StatsCommand(),
             new HelpCommand(),
-            new ExitCommand());
+            new ExitCommand(),
+            new StartCommand()
+    );
 
-    public void handleUserChoice(String userChoice, Scanner scanner) {
-        boolean commandFound = false;
+    public String handleUserChoice(String userText) {
+        String[] parts = userText.trim().split("\\s+", 2);//!!!!!!
+        String commandName = parts[0];
+        String arguments = parts.length > 1 ? parts[1] : "";
+
         for (CommandExecute command : commands) {
-            if (command.Match(userChoice)) {
-                command.execute(scanner);
-                commandFound = true;
-                break;
+            if (command.Match(commandName)) {
+                return command.execute(arguments);
             }
         }
-        if (!commandFound) {
-            logger.warn("Команда вне диапазона: {}", userChoice);
-            System.out.println("Вы ввели некорректную команду. Исправьте её и попробуйте снова.");
-        }
+        logger.warn("Команда вне диапазона: {}", commandName);
+        return "Вы ввели неккоректную команду. Введите /help для списка команд.";
     }
 }

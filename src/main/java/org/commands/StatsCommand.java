@@ -1,8 +1,8 @@
 package org.commands;
 
-import java.util.Scanner;
-
 import org.example.Weather;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * класс отвечает за обработкку команды /stats
@@ -12,13 +12,17 @@ import org.example.Weather;
 public class StatsCommand implements CommandExecute {
     @Override
     public boolean Match(String input) {
+
         return input.equalsIgnoreCase("/stats");
     }
 
     @Override
-    public void execute(Scanner scanner) {
-        String encodedCity = Weather.getEncodingCity(scanner);
-        int daysToRequest = 1;
-        Weather.output(Weather.Api(encodedCity, daysToRequest));
+    public String execute(String arguments) {
+        if(arguments.isEmpty()) {
+            return "Пожалуйста укажите город. Пример: /stats Москва";
+        }
+
+        String encodedCity = URLEncoder.encode(arguments, StandardCharsets.UTF_8);
+        return Weather.output(Weather.Api(encodedCity,1));
     }
 }

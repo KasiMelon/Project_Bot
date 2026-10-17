@@ -1,7 +1,5 @@
 package org.commands;
 
-import java.util.Scanner;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,9 +17,12 @@ public class HelpCommand implements CommandExecute {
     }
 
     @Override
-    public void execute(Scanner scanner) {
+    public String execute(String arguments) {
         logger.info("Чат-бот успешно выполнил команду пользователя /help");
-        System.out.println(
-                "Функционал бота включает в себя несколько команд:\n1. /forecast - показ погоды на запрошенный день недели (предел - 1 неделя вперёд)\n2. /stats - осадки, температура и погодные условия в целом на момент запроса\n3. /help - показ существующих команд и их краткое описание\n4. /exit - завершение работы ");
+        return "Функционал бота включает в себя несколько команд:\n" +
+                "1. /forecast [город] [дни]- показ погоды на запрошенный день недели (предел - 1 неделя вперёд) (например: /forecast Москва 3)\n" +
+                "2. /stats [город] - осадки, температура и погодные условия в целом на момент запроса\n" +
+                "3. /help - показ существующих команд и их краткое описание\n" +
+                "4. /exit - завершение работы ";
     }
 }
