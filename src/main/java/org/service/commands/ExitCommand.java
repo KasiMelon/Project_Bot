@@ -1,7 +1,6 @@
-package org.commands;
+package org.service.commands;
 
-import java.util.Scanner;
-
+import org.ui.ConsoleCommandUI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,13 +11,13 @@ public class ExitCommand implements Command {
     private static final Logger logger = LoggerFactory.getLogger(ExitCommand.class);
 
     @Override
-    public boolean Match(String input) {
+    public boolean match(String input) {
         return input.equalsIgnoreCase("/exit");
     }
 
     @Override
-    public void execute(Scanner scanner) {
+    public void execute() {
         logger.info("Чат-бот успешно выполнил все команды пользователя");
-        System.out.println("Спасибо что воспользовались нашим чат ботом. До свидание");
+        ConsoleCommandUI.ExitInfo();
     }
 }

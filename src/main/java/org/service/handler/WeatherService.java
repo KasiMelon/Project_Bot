@@ -1,69 +1,42 @@
-package org.example;
+package org.service.handler;
 
-import java.io.IOException;
-
-import java.net.URI;
 import java.net.URLEncoder;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
 
-import org.commands.Writer;
+import org.model.apiWeather.ApiWeather;
+import org.ui.ConsoleCommandUI;
+
+import org.ui.Writer;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import io.github.cdimascio.dotenv.Dotenv;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class WeatherService {
     private static final Logger logger = LoggerFactory.getLogger(WeatherService.class);
-
+    private final ConsoleCommandUI weatherInput = new ConsoleCommandUI();
+    private final ApiWeather apiWeather = new ApiWeather();
     /**
      *формируется HTTP запрос на сервер ApiWeather
      * @param encodedCity запрашиваемый город
      * @param daysToRequest количество дней
      * @return
      */
-    public static HttpResponse<String> Api(String encodedCity, int daysToRequest) {
-        Dotenv dotenv = Dotenv.load();
-        String apiKey = dotenv.get("ApiWeather");
-        try {
-            String url = "http://api.weatherapi.com/v1/forecast.json?key=" + apiKey
-                    + "&q=" + encodedCity
-                    + "&days=" + daysToRequest
-                    + "&lang=ru";
-
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(url))
-                    .GET()
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            logger.debug("Запрос успешно сформирован {}", response);
-            return response;
-        } catch (IOException | InterruptedException e) {
-            logger.error("Ошибка сети: {}", e.getMessage(), e);
-            System.out.println("Возникла ошибка в процессе установления связи");
-        }
-        return null;
-    }
 
     /**
      * метод запрашивает город у пользователя
-     * @param scanner
+     *
      * @return
      */
-    public static String getEncodingCity(Scanner scanner) {
-        System.out.println("Введите город: ");
+    public String getEncodingCity() {
+        ConsoleCommandUI.InputCity();
         String city;
-        city = scanner.nextLine();
+        city = weatherInput.userInput();
         String encodedCity = URLEncoder.encode(city, StandardCharsets.UTF_8);
         logger.info("Пользователь успешно ввёл название города {}", encodedCity);
         return encodedCity;
@@ -71,13 +44,13 @@ public class WeatherService {
 
     /**
      * метод запрашивает количество дней для прогноза погоды
-     * @param scanner
+     *
      * @return
      */
-    public static int getDaysToRequest(Scanner scanner) {
+    public int getDaysToRequest() {
         while (true) {
-            System.out.print("На сколько дней нужен будет прогноз? (0 - на сегодня, максимум на 7 дней): ");
-            String input = scanner.nextLine().trim();
+            ConsoleCommandUI.InputDay();
+            String input = weatherInput.userTrimInput();
             try {
                 int daysAhead = Integer.parseInt(input);
                 if (daysAhead >= 0 && daysAhead <= 7) {
@@ -85,10 +58,10 @@ public class WeatherService {
                     return daysAhead;
                 }
                 logger.warn("Пользователь указал дни вне диапазона: {}", daysAhead);
-                System.out.println("Прогноз можно запросить только в диапазоне от 0 до 7 дней. Введите диапазон снова.\n");
+                ConsoleCommandUI.IncorrectDay();
             } catch (NumberFormatException e) {
                 logger.warn("Введено не числовое значение: {}", input);
-                System.out.println("Необходимо ввести числовое значение. Попробуйте ещё раз.\n");
+                ConsoleCommandUI.IncorrectNumber();
             }
         }
     }
@@ -126,10 +99,10 @@ public class WeatherService {
  */
         } else if (response.statusCode() == 400 || response.statusCode() == 404) {
             logger.error("Введено неверное название города");
-            System.out.println("Вы ввели некорректное название города, перепроверьте его и введите снова");
+            ConsoleCommandUI.IncorrectCity();
         } else {
             logger.error("Возникла неполадка {}", response.statusCode());
-            System.out.println("Возникла ошибка");
+            ConsoleCommandUI.Error();
         }
     }
 }

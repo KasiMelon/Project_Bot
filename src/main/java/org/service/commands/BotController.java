@@ -1,7 +1,6 @@
-package org.commands;
+package org.service.commands;
 
 import java.util.List;
-import java.util.Scanner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,11 +16,11 @@ public class BotController {
             new HelpCommand(),
             new ExitCommand());
 
-    public void handleUserChoice(String userChoice, Scanner scanner) {
+    public void handleUserChoice(String userChoice) {
         boolean commandFound = false;
         for (Command command : commands) {
-            if (command.Match(userChoice)) {
-                command.execute(scanner);
+            if (command.match(userChoice)) {
+                command.execute();
                 commandFound = true;
                 break;
             }

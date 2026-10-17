@@ -1,38 +1,27 @@
 package org.example;
 
-import java.util.Scanner;
-
-import org.commands.BotController;
+import org.model.env.EnvConfig;
+import org.model.env.EnvConnect;
+import org.service.handler.Handler;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.ui.ConsoleHandlerUI;
 
 public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     /**
      * основная часть кода, отвечающая за взаимодействие с пользователем
+     *
      * @param args
      */
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Добро пожаловать в чат бот прогноза погоды");
-        System.out.println("Для старта чат бота введите команду /start: ");
-        String userChoice = scanner.nextLine();
-        BotController botController = new BotController();
-        while (true) {
-            if (userChoice.equals("/start")) {
-                do {
-                    System.out.println("Функционал данного чат бота: /forecast, /stats, /help, /exit ");
-                    userChoice = scanner.nextLine();
-                    botController.handleUserChoice(userChoice, scanner);
-                } while (!userChoice.toLowerCase().equals("/exit"));
-                return;
-
-            } else {
-                logger.error("Команда на старт не распознана {}", userChoice);
-                System.out.println("Вы ввели некорректную команду. Запустите чат-бот снова и введите /start");
-                return;
-            }
-        }
+        EnvConfig config = EnvConfig.getInstance();
+        EnvConnect db = new EnvConnect();
+        db.connect();
+        ConsoleHandlerUI.userInfo();
+        ConsoleHandlerUI ui = new ConsoleHandlerUI();
+        String userChoice = ui.userInput();
+        Handler.handle(userChoice);
     }
 }

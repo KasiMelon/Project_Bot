@@ -1,6 +1,4 @@
-package org.commands;
-
-import org.json.JSONObject;
+package org.ui;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
