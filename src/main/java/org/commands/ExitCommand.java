@@ -6,11 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * данный класс отвечает за обработку команды /exit
- * метод Match проверяет слвпадает ли введёный текст с /exit
- * метод execute выводит прощальное сообщение
+ * Класс ExitCommand, реализующуий команду выхода из программы и завершения работы бота
  */
-public class ExitCommand implements CommandExecute {
+public class ExitCommand implements Command {
     private static final Logger logger = LoggerFactory.getLogger(ExitCommand.class);
 
     @Override

@@ -21,8 +21,8 @@ import io.github.cdimascio.dotenv.Dotenv;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Weather {
-    private static final Logger logger = LoggerFactory.getLogger(Weather.class);
+public class WeatherService {
+    private static final Logger logger = LoggerFactory.getLogger(WeatherService.class);
 
     /**
      *формируется HTTP запрос на сервер ApiWeather

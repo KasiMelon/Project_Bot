@@ -2,14 +2,12 @@ package org.commands;
 
 import java.util.Scanner;
 
-import org.example.Weather;
+import org.example.WeatherService;
 
 /**
- * данный класс отвечает за обработку команды /forecast
- * метод Match проверяет совпадает ли введённый текст с /forecast
- * метод execute получает название города и сдвиг по дням. а затем передаёт собранные данные в метод Weather.Api для выполнения HTTP запроса
+ * ForecastCommand реализует вывод погоды через несколько дней.
  */
-public class ForecastCommand implements CommandExecute {
+public class ForecastCommand implements Command {
     @Override
     public boolean Match(String input) {
         return input.equalsIgnoreCase("/forecast");
@@ -17,8 +15,8 @@ public class ForecastCommand implements CommandExecute {
 
     @Override
     public void execute(Scanner scanner) {
-        String encodedCity = Weather.getEncodingCity(scanner);
-        int daysToRequest = Weather.getDaysToRequest(scanner);
-        Weather.output(Weather.Api(encodedCity, daysToRequest));
+        String encodedCity = WeatherService.getEncodingCity(scanner);
+        int daysToRequest = WeatherService.getDaysToRequest(scanner);
+        WeatherService.output(WeatherService.Api(encodedCity, daysToRequest));
     }
 }

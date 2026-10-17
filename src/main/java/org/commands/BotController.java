@@ -7,11 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * данный класс принимает ввод пользователя и решает какое действие нужно выполнить
+ * Принимает ввод пользователя и определяет, какую команду нужно выполнить
  */
 public class BotController {
     private static final Logger logger = LoggerFactory.getLogger(BotController.class);
-    private final List<CommandExecute> commands = List.of(
+    private final List<Command> commands = List.of(
             new ForecastCommand(),
             new StatsCommand(),
             new HelpCommand(),
@@ -19,7 +19,7 @@ public class BotController {
 
     public void handleUserChoice(String userChoice, Scanner scanner) {
         boolean commandFound = false;
-        for (CommandExecute command : commands) {
+        for (Command command : commands) {
             if (command.Match(userChoice)) {
                 command.execute(scanner);
                 commandFound = true;

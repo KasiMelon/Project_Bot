@@ -6,11 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * класс отвечает за обработку команды /help
- * метод Match сравнивает введёный текст с /help
- * метод execute выводит полезную информацию для пользователя
+ * HelpCommand реализует вывод руководства по пользованию ботом для пользователя.
  */
-public class HelpCommand implements CommandExecute {
+public class HelpCommand implements Command {
     private static final Logger logger = LoggerFactory.getLogger(HelpCommand.class);
 
     @Override
