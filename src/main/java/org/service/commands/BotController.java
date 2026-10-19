@@ -10,24 +10,25 @@ import org.slf4j.LoggerFactory;
  */
 public class BotController {
     private static final Logger logger = LoggerFactory.getLogger(BotController.class);
-    private final List<Command> commands = List.of(
+    private final List<CommandExecute> commands = List.of(
             new ForecastCommand(),
             new StatsCommand(),
             new HelpCommand(),
-            new ExitCommand());
+            new ExitCommand(),
+            new StartCommand()
+    );
 
-    public void handleUserChoice(String userChoice) {
-        boolean commandFound = false;
-        for (Command command : commands) {
-            if (command.match(userChoice)) {
-                command.execute();
-                commandFound = true;
-                break;
+    public String handleUserChoice(String userText) {
+        String[] parts = userText.trim().split("\\s+", 2);//!!!!!!
+        String commandName = parts[0];
+        String arguments = parts.length > 1 ? parts[1] : "";
+
+        for (CommandExecute command : commands) {
+            if (command.Match(commandName)) {
+                return command.execute(arguments);
             }
         }
-        if (!commandFound) {
-            logger.warn("Команда вне диапазона: {}", userChoice);
-            System.out.println("Вы ввели некорректную команду. Исправьте её и попробуйте снова.");
-        }
+        logger.warn("Команда вне диапазона: {}", commandName);
+        return "Вы ввели неккоректную команду. Введите /help для списка команд.";
     }
 }
