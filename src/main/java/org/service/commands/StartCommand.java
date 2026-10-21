@@ -1,6 +1,5 @@
-package org.commands;
+package org.service.commands;
 
-import org.slf4j.ILoggerFactory;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 

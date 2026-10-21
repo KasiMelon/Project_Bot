@@ -1,8 +1,6 @@
 package org.example;
 
-import org.commands.BotController;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.service.commands.BotController;
 import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
 import org.telegram.telegrambots.longpolling.util.LongPollingSingleThreadUpdateConsumer;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;

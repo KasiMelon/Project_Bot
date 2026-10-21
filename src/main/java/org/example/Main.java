@@ -16,7 +16,7 @@ public class Main {
         EnvConfig config = EnvConfig.getInstance();
         EnvConnect db = new EnvConnect();
         db.connect();
-
+        String apiBot = EnvConfig.getInstance().getApiTelegram();
         try (TelegramBotsLongPollingApplication botsApplication = new TelegramBotsLongPollingApplication()) {
 
             botsApplication.registerBot(apiBot, new CommandBot(apiBot));

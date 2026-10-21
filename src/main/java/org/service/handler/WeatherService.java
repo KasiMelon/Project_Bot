@@ -31,14 +31,14 @@ public class WeatherService {
      * метод запрашивает город у пользователя
      * @return
      */
-    public static String getEncodingCity(Scanner scanner) {
+    /**public static String getEncodingCity() {
         System.out.println("Введите город: ");
         String city;
         city = scanner.nextLine();
         String encodedCity = URLEncoder.encode(city, StandardCharsets.UTF_8);
         logger.info("Пользователь успешно ввёл название города {}", encodedCity);
         return encodedCity;
-    }
+    }*/
 
 
     /**
@@ -69,7 +69,7 @@ public class WeatherService {
                 JSONObject condition = day.getJSONObject("condition");
                 String conditionText = condition.getString("text");
 
-                Writer writer = new Writer(city, avgTemp, humidity, conditionText, date);
+                WriterUI writer = new WriterUI(city, avgTemp, humidity, conditionText, date);
                 result.append(writer.toString()).append("\n");
             }
             return result.toString();
@@ -81,14 +81,12 @@ public class WeatherService {
  */
         } else if (response.statusCode() == 400 || response.statusCode() == 404) {
             logger.error("Введено неверное название города");
-            return "Вы ввели некорректное название города, перепроверьте его и введите снова";
             ConsoleCommandUI.IncorrectCity();
-            return null;
+            return "Вы ввели некорректное название города, перепроверьте его и введите снова";
         } else {
             logger.error("Возникла неполадка {}", response.statusCode());
-            return "Возникла ошибка на сервере погоды (Код: " + response.statusCode() + ").";
             ConsoleCommandUI.Error();
-            return null;
+            return "Возникла ошибка на сервере погоды (Код: " + response.statusCode() + ").";
         }
     }
 }
