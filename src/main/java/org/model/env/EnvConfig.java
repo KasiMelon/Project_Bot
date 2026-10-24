@@ -7,6 +7,7 @@ public class EnvConfig {
 
     private final String ApiWeather;
     private final String ApiTelegram;
+
     private EnvConfig() {
         Dotenv dotenv = Dotenv.configure()
                 .ignoreIfMissing()
@@ -26,6 +27,9 @@ public class EnvConfig {
     public String getApiWeather() {
         return ApiWeather;
     }
-    public String getApiTelegram(){return ApiTelegram;}
+
+    public String getApiTelegram() {
+        return ApiTelegram;
+    }
 }
 

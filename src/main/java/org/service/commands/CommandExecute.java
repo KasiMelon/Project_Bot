@@ -2,7 +2,7 @@ package org.service.commands;
 
 
 public interface CommandExecute {
-    boolean Match(String input);
+    boolean match(String input);
 
     String execute(String arguments);
 }

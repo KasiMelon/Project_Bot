@@ -1,30 +1,27 @@
 package org.service.commands;
 
 import org.model.apiWeather.ApiWeather;
-import org.service.handler.WeatherService;
+import org.service.weather.WeatherService;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-/**
- * класс отвечает за обработкку команды /stats
- * метод Match сравнивает введёный текст с /stats
- * метод execute получет введёный город и выводит полученный данные прогноза на один день
- */
+import org.ui.ConsoleCommandUI;
+
 public class StatsCommand implements CommandExecute {
     @Override
-    public boolean Match(String input) {
+    public boolean match(String input) {
 
         return input.equalsIgnoreCase("/stats");
     }
 
     @Override
     public String execute(String arguments) {
-        if(arguments.isEmpty()) {
-            return "Пожалуйста укажите город. Пример: /stats Москва";
+        if (arguments.isEmpty()) {
+            return ConsoleCommandUI.InputCity();
         }
 
         String encodedCity = URLEncoder.encode(arguments, StandardCharsets.UTF_8);
-        return WeatherService.output(ApiWeather.Api(encodedCity,1));
+        return WeatherService.output(ApiWeather.Api(encodedCity, 1));
     }
 }

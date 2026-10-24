@@ -1,4 +1,4 @@
-package org.example;
+package org.service.telegram;
 
 import org.service.commands.BotController;
 import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
@@ -9,13 +9,12 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 
-
-public class CommandBot implements LongPollingSingleThreadUpdateConsumer {
+public class TelegramBot implements LongPollingSingleThreadUpdateConsumer {
 
     private final TelegramClient telegramClient;
     private final BotController botController;
 
-    public CommandBot(String botToken) {
+    public TelegramBot(String botToken) {
         this.telegramClient = new OkHttpTelegramClient(botToken);
         this.botController = new BotController();
 

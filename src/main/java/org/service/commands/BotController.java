@@ -4,10 +4,8 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.ui.ConsoleCommandUI;
 
-/**
- * Принимает ввод пользователя и определяет, какую команду нужно выполнить
- */
 public class BotController {
     private static final Logger logger = LoggerFactory.getLogger(BotController.class);
     private final List<CommandExecute> commands = List.of(
@@ -24,11 +22,11 @@ public class BotController {
         String arguments = parts.length > 1 ? parts[1] : "";
 
         for (CommandExecute command : commands) {
-            if (command.Match(commandName)) {
+            if (command.match(commandName)) {
                 return command.execute(arguments);
             }
         }
         logger.warn("Команда вне диапазона: {}", commandName);
-        return "Вы ввели неккоректную команду. Введите /help для списка команд.";
+        return ConsoleCommandUI.IncorrectCommand();
     }
 }
