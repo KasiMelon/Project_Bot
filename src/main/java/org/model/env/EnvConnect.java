@@ -2,6 +2,7 @@ package org.model.env;
 
 public class EnvConnect {
     public void connect() {
-        String url = EnvConfig.getInstance().getApiWeather();
+        String url1 = EnvConfig.getInstance().getApiWeather();
+        String url2 = EnvConfig.getInstance().getApiTelegram();
     }
 }

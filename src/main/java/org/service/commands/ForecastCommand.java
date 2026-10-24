@@ -1,25 +1,45 @@
 package org.service.commands;
 
+import org.service.weather.WeatherService;
 
-import org.service.handler.WeatherService;
-import org.model.apiWeather.ApiWeather;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 import org.ui.ConsoleCommandUI;
+import org.model.apiWeather.ApiWeather;
 
-/**
- * ForecastCommand реализует вывод погоды через несколько дней.
- */
-public class ForecastCommand implements Command {
+public class ForecastCommand implements CommandExecute {
     @Override
     public boolean match(String input) {
         return input.equalsIgnoreCase("/forecast");
+
     }
 
     @Override
-    public void execute() {
-        WeatherService weatherService = new WeatherService();
-        ApiWeather apiWeather = new ApiWeather();
-        String encodedCity = weatherService.getEncodingCity();
-        int daysToRequest = weatherService.getDaysToRequest();
-        ConsoleCommandUI.CommandResult(WeatherService.output(apiWeather.Api(encodedCity, daysToRequest)));
+    public String execute(String arguments) {
+        if (arguments.isEmpty()) {
+            return ConsoleCommandUI.InputCityAndDays();
+        }
+
+        int lastSpaceIndex = arguments.lastIndexOf(" ");
+        String city;
+        int days = 1;
+
+        if (lastSpaceIndex != -1) {
+            city = arguments.substring(0, lastSpaceIndex).trim();
+            String dayStr = arguments.substring(lastSpaceIndex + 1).trim();
+            try {
+                days = Integer.parseInt(dayStr);
+                if (days < 0 || days > 7) {
+                    return ConsoleCommandUI.IncorrectDay();
+                }
+            } catch (NumberFormatException e) {
+                city = arguments;
+            }
+        } else {
+            city = arguments;
+        }
+        String encodedCity = URLEncoder.encode(city, StandardCharsets.UTF_8);
+        return WeatherService.output(ApiWeather.Api(encodedCity, days));
     }
 }

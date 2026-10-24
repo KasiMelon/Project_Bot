@@ -3,7 +3,6 @@ package org.model.apiWeather;
 import org.model.env.EnvConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.ui.ConsoleCommandUI;
 
 import java.io.IOException;
 import java.net.http.HttpClient;
@@ -13,7 +12,6 @@ import java.net.URI;
 
 public class ApiWeather {
     private static final Logger logger = LoggerFactory.getLogger(ApiWeather.class);
-    private final ConsoleCommandUI weatherInput = new ConsoleCommandUI();
 
     public static HttpResponse<String> Api(String encodedCity, int daysToRequest) {
         String apiKey = EnvConfig.getInstance().getApiWeather();
@@ -34,7 +32,6 @@ public class ApiWeather {
             return response;
         } catch (IOException | InterruptedException e) {
             logger.error("Ошибка сети: {}", e.getMessage(), e);
-            ConsoleCommandUI.NetworkError();
         }
         return null;
     }

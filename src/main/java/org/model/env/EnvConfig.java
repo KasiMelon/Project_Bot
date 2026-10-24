@@ -6,6 +6,7 @@ public class EnvConfig {
     private static EnvConfig instance;
 
     private final String ApiWeather;
+    private final String ApiTelegram;
 
     private EnvConfig() {
         Dotenv dotenv = Dotenv.configure()
@@ -13,6 +14,7 @@ public class EnvConfig {
                 .load();
 
         this.ApiWeather = dotenv.get("ApiWeather");
+        this.ApiTelegram = dotenv.get("TELEGRAM_BOT_TOKEN");
     }
 
     public static synchronized EnvConfig getInstance() {
@@ -24,6 +26,10 @@ public class EnvConfig {
 
     public String getApiWeather() {
         return ApiWeather;
+    }
+
+    public String getApiTelegram() {
+        return ApiTelegram;
     }
 }
 

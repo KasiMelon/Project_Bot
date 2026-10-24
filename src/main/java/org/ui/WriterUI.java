@@ -3,9 +3,6 @@ package org.ui;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Класс, отвечающий за коррекный вывод запрашиваемой информации пользователю.
- */
 public class WriterUI {
     private static final Logger logger = LoggerFactory.getLogger(WriterUI.class);
     private final String city;

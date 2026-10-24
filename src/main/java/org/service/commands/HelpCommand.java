@@ -1,13 +1,10 @@
 package org.service.commands;
 
-import org.ui.ConsoleCommandUI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.ui.ConsoleCommandUI;
 
-/**
- * HelpCommand реализует вывод руководства по пользованию ботом для пользователя.
- */
-public class HelpCommand implements Command {
+public class HelpCommand implements CommandExecute {
     private static final Logger logger = LoggerFactory.getLogger(HelpCommand.class);
 
     @Override
@@ -16,8 +13,8 @@ public class HelpCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public String execute(String arguments) {
         logger.info("Чат-бот успешно выполнил команду пользователя /help");
-        ConsoleCommandUI.HelpInfo();
+        return ConsoleCommandUI.HelpInfo();
     }
 }
