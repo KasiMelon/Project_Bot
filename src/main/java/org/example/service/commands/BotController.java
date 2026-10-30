@@ -1,10 +1,10 @@
-package org.service.commands;
+package org.example.service.commands;
 
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.ui.ConsoleCommandUI;
+import org.example.ui.ConsoleCommandUI;
 
 public class BotController {
     private static final Logger logger = LoggerFactory.getLogger(BotController.class);

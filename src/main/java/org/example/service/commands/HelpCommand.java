@@ -1,8 +1,8 @@
-package org.service.commands;
+package org.example.service.commands;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.ui.ConsoleCommandUI;
+import org.example.ui.ConsoleCommandUI;
 
 public class HelpCommand implements CommandExecute {
     private static final Logger logger = LoggerFactory.getLogger(HelpCommand.class);

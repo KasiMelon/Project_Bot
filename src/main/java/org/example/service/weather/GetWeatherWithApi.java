@@ -1,6 +1,6 @@
-package org.model.apiWeather;
+package org.example.service.weather;
 
-import org.model.env.EnvConfig;
+import org.example.model.env.EnvConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,10 +10,10 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.URI;
 
-public class ApiWeather {
-    private static final Logger logger = LoggerFactory.getLogger(ApiWeather.class);
+public class GetWeatherWithApi {
+    private static final Logger logger = LoggerFactory.getLogger(GetWeatherWithApi.class);
 
-    public static HttpResponse<String> Api(String encodedCity, int daysToRequest) {
+    public static HttpResponse<String> GetWeatherInfo(String encodedCity, int daysToRequest) {
         String apiKey = EnvConfig.getInstance().getApiWeather();
         try {
             String url = "http://api.weatherapi.com/v1/forecast.json?key=" + apiKey

@@ -1,12 +1,13 @@
-package org.service.commands;
+package org.example.service.commands;
 
-import org.service.weather.WeatherService;
+import org.example.service.weather.GetWeatherWithApi;
+import org.example.service.weather.WeatherService;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-import org.ui.ConsoleCommandUI;
-import org.model.apiWeather.ApiWeather;
+import org.example.ui.ConsoleCommandUI;
+import org.example.ui.WeatherUI;
 
 public class ForecastCommand implements CommandExecute {
     @Override
@@ -40,6 +41,11 @@ public class ForecastCommand implements CommandExecute {
             city = arguments;
         }
         String encodedCity = URLEncoder.encode(city, StandardCharsets.UTF_8);
-        return WeatherService.output(ApiWeather.Api(encodedCity, days));
+        StringBuilder result = new StringBuilder();
+        for (int i = 1; i <= days; ++i) {
+            WeatherUI weather = new WeatherUI(WeatherService.CreateDTO(GetWeatherWithApi.GetWeatherInfo(encodedCity, days)));
+            result.append(weather).append("\n");
+        }
+        return result.toString();
     }
 }

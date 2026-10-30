@@ -1,4 +1,4 @@
-package org.service.commands;
+package org.example.service.commands;
 
 
 public interface CommandExecute {

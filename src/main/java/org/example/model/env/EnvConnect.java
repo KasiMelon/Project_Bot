@@ -1,4 +1,4 @@
-package org.model.env;
+package org.example.model.env;
 
 public class EnvConnect {
     public void connect() {

@@ -1,4 +1,4 @@
-package org.ui;
+package org.example.ui;
 
 public class ConsoleCommandUI {
     public static String ExitInfo() {
@@ -46,7 +46,7 @@ public class ConsoleCommandUI {
         return "Возникла ошибка на сервере погоды (Код: ";
     }
 
-    public static void CommandResult(WriterUI writerUI) {
-        System.out.println(writerUI);
+    public static void CommandResult(WeatherUI weatherUI) {
+        System.out.println(weatherUI);
     }
 }

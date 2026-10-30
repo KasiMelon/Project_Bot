@@ -1,4 +1,4 @@
-package org.model.env;
+package org.example.model.env;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
@@ -13,7 +13,7 @@ public class EnvConfig {
                 .ignoreIfMissing()
                 .load();
 
-        this.ApiWeather = dotenv.get("ApiWeather");
+        this.ApiWeather = dotenv.get("GetWeatherWithApi");
         this.ApiTelegram = dotenv.get("TELEGRAM_BOT_TOKEN");
     }
 

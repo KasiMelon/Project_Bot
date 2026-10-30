@@ -1,6 +1,6 @@
-package org.service.telegram;
+package org.example.service.telegram;
 
-import org.service.commands.BotController;
+import org.example.service.commands.BotController;
 import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
 import org.telegram.telegrambots.longpolling.util.LongPollingSingleThreadUpdateConsumer;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;

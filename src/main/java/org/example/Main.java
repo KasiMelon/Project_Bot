@@ -1,8 +1,8 @@
 package org.example;
 
-import org.model.env.EnvConfig;
-import org.model.env.EnvConnect;
-import org.service.telegram.TelegramBot;
+import org.example.model.env.EnvConfig;
+import org.example.model.env.EnvConnect;
+import org.example.service.telegram.TelegramBot;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.telegram.telegrambots.longpolling.TelegramBotsLongPollingApplication;
@@ -18,7 +18,7 @@ public class Main {
         try (TelegramBotsLongPollingApplication botsApplication = new TelegramBotsLongPollingApplication()) {
 
             botsApplication.registerBot(apiBot, new TelegramBot(apiBot));
-            logger.info("Бот успешно заработал!");
+            logger.info("Бот успе4шно заработал!");
 
             Thread.currentThread().join();
         } catch (Exception e) {
