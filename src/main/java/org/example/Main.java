@@ -1,22 +1,24 @@
 package org.example;
 
-import java.util.Scanner;
-
-import io.github.cdimascio.dotenv.Dotenv;
-import org.commands.BotController;
+import org.example.model.env.EnvConfig;
+import org.example.model.env.EnvConnect;
+import org.example.service.telegram.TelegramBot;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.telegram.telegrambots.longpolling.TelegramBotsLongPollingApplication;
 
 public class Main {
-    public static void main(String[] args) {
-        Dotenv dotenv = Dotenv.load();
-        String apiBot = dotenv.get("TELEGRAM_BOT_TOKEN");
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
+    public static void main(String[] args) {
+        EnvConfig config = EnvConfig.getInstance();
+        EnvConnect db = new EnvConnect();
+        db.connect();
+        String apiBot = EnvConfig.getInstance().getApiTelegram();
         try (TelegramBotsLongPollingApplication botsApplication = new TelegramBotsLongPollingApplication()) {
 
-            botsApplication.registerBot(apiBot, new CommandBot(apiBot));
-            System.out.println("Бот успешно заработал");
+            botsApplication.registerBot(apiBot, new TelegramBot(apiBot));
+            logger.info("Бот успе4шно заработал!");
 
             Thread.currentThread().join();
         } catch (Exception e) {

@@ -1,8 +1,8 @@
-package org.commands;
+package org.example.service.commands;
 
 
 public interface CommandExecute {
-    boolean Match(String input);
+    boolean match(String input);
 
     String execute(String arguments);
 }
