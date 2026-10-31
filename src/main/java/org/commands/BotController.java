@@ -19,7 +19,7 @@ public class BotController {
     );
 
     public String handleUserChoice(String userText) {
-        String[] parts = userText.trim().split("\\s+", 2);//!!!!!!
+        String[] parts = userText.trim().split("\\s+", 2);
         String commandName = parts[0];
         String arguments = parts.length > 1 ? parts[1] : "";
 

@@ -35,7 +35,6 @@ public class CommandBot implements LongPollingSingleThreadUpdateConsumer {
                     .chatId(charId)
                     .text(responseText)
                     .build();
-
             try {
                 telegramClient.execute(message);
             } catch (TelegramApiException e) {
