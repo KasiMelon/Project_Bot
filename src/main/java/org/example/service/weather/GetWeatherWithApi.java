@@ -11,6 +11,7 @@ import java.net.http.HttpResponse;
 import java.net.URI;
 
 public class GetWeatherWithApi {
+
     private static final Logger logger = LoggerFactory.getLogger(GetWeatherWithApi.class);
 
     public static HttpResponse<String> GetWeatherInfo(String encodedCity, int daysToRequest) {

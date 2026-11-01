@@ -13,7 +13,7 @@ public class EnvConfig {
                 .ignoreIfMissing()
                 .load();
 
-        this.ApiWeather = dotenv.get("GetWeatherWithApi");
+        this.ApiWeather = dotenv.get("ApiWeather");
         this.ApiTelegram = dotenv.get("TELEGRAM_BOT_TOKEN");
     }
 

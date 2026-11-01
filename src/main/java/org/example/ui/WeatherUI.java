@@ -20,7 +20,6 @@ public class WeatherUI {
         date = dto.date();
     }
 
-
     @Override
     public String toString() {
         return "Дата: " + date + "\n" +

@@ -9,6 +9,8 @@ import java.nio.charset.StandardCharsets;
 import org.example.ui.ConsoleCommandUI;
 import org.example.ui.WeatherUI;
 
+import java.util.List;
+
 public class ForecastCommand implements CommandExecute {
     @Override
     public boolean match(String input) {
@@ -31,7 +33,7 @@ public class ForecastCommand implements CommandExecute {
             String dayStr = arguments.substring(lastSpaceIndex + 1).trim();
             try {
                 days = Integer.parseInt(dayStr);
-                if (days < 0 || days > 7) {
+                if (days < 0 || days > 3) {
                     return ConsoleCommandUI.IncorrectDay();
                 }
             } catch (NumberFormatException e) {
@@ -41,10 +43,15 @@ public class ForecastCommand implements CommandExecute {
             city = arguments;
         }
         String encodedCity = URLEncoder.encode(city, StandardCharsets.UTF_8);
+        var response = GetWeatherWithApi.GetWeatherInfo(encodedCity, days);
+
+        List<org.example.model.WeatherObjects.WeatherDTO> dtoList = WeatherService.CreateForecastList(response);
+
         StringBuilder result = new StringBuilder();
-        for (int i = 1; i <= days; ++i) {
-            WeatherUI weather = new WeatherUI(WeatherService.CreateDTO(GetWeatherWithApi.GetWeatherInfo(encodedCity, days)));
-            result.append(weather).append("\n");
+
+        for (org.example.model.WeatherObjects.WeatherDTO dto : dtoList) {
+            WeatherUI weather = new WeatherUI(dto);
+            result.append(weather).append("\n\n");
         }
         return result.toString();
     }

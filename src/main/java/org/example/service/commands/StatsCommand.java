@@ -22,8 +22,8 @@ public class StatsCommand implements CommandExecute {
             return ConsoleCommandUI.InputCity();
         }
 
-        String encodedCity = URLEncoder.encode(arguments, StandardCharsets.UTF_8);
-        WeatherUI weather = new WeatherUI(WeatherService.CreateDTO(GetWeatherWithApi.GetWeatherInfo(encodedCity, 1)));
+        String encodedQuery = URLEncoder.encode(arguments, StandardCharsets.UTF_8).replace("%2C", ",");
+        WeatherUI weather = new WeatherUI(WeatherService.CreateDTO(GetWeatherWithApi.GetWeatherInfo(encodedQuery, 1)));
         return weather.toString();
     }
 }

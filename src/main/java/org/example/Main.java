@@ -18,7 +18,7 @@ public class Main {
         try (TelegramBotsLongPollingApplication botsApplication = new TelegramBotsLongPollingApplication()) {
 
             botsApplication.registerBot(apiBot, new TelegramBot(apiBot));
-            logger.info("Бот успе4шно заработал!");
+            logger.info("Бот успешно заработал!");
 
             Thread.currentThread().join();
         } catch (Exception e) {
