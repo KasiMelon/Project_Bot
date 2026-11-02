@@ -1,27 +1,24 @@
-package org.ui;
+package org.example.ui;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.example.model.WeatherObjects.WeatherDTO;
 
-/**
- * Класс, отвечающий за коррекный вывод запрашиваемой информации пользователю.
- */
-public class WriterUI {
-    private static final Logger logger = LoggerFactory.getLogger(WriterUI.class);
+public class WeatherUI {
+    private static final Logger logger = LoggerFactory.getLogger(WeatherUI.class);
     private final String city;
     private final double avgTemp;
     private final double humidity;
     private final String conditionText;
     private final String date;
 
-    public WriterUI(String city, double avgTemp, double humidity, String conditionText, String date) {
-        this.city = city;
-        this.avgTemp = avgTemp;
-        this.humidity = humidity;
-        this.conditionText = conditionText;
-        this.date = date;
+    public WeatherUI(WeatherDTO dto) {
+        city = dto.city();
+        avgTemp = dto.avgTemp();
+        humidity = dto.humidity();
+        conditionText = dto.conditionText();
+        date = dto.date();
     }
-
 
     @Override
     public String toString() {
