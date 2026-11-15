@@ -14,8 +14,8 @@ public class StartCommand implements CommandExecute {
     }
 
     @Override
-    public String execute(String arguments) {
+    public String execute(String arguments,Long chatId) {
         logger.info("Бот начал работу");
-        return ConsoleCommandUI.WelcomeInfo();
+        return ConsoleCommandUI.WelcomeInfo(chatId);
     }
 }

@@ -13,8 +13,8 @@ public class HelpCommand implements CommandExecute {
     }
 
     @Override
-    public String execute(String arguments) {
+    public String execute(String arguments, Long chatId) {
         logger.info("Чат-бот успешно выполнил команду пользователя /help");
-        return ConsoleCommandUI.HelpInfo();
+        return ConsoleCommandUI.HelpInfo(chatId);
     }
 }
