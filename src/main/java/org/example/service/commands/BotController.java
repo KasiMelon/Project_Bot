@@ -16,17 +16,17 @@ public class BotController {
             new StartCommand()
     );
 
-    public String handleUserChoice(long chatId,String userText) {
+    public String handleUserChoice(String userText) {
         String[] parts = userText.trim().split("\\s+", 2);
         String commandName = parts[0];
         String arguments = parts.length > 1 ? parts[1] : "";
 
         for (CommandExecute command : commands) {
             if (command.match(commandName)) {
-                return command.execute(arguments,chatId);
+                return command.execute(arguments);
             }
         }
         logger.warn("Команда вне диапазона: {}", commandName);
-        return ConsoleCommandUI.IncorrectCommand(chatId);
+        return ConsoleCommandUI.IncorrectCommand();
     }
 }

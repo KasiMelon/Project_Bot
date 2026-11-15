@@ -17,13 +17,13 @@ public class StatsCommand implements CommandExecute {
     }
 
     @Override
-    public String execute(String arguments,Long chatId) {
+    public String execute(String arguments) {
         if (arguments.isEmpty()) {
-            return ConsoleCommandUI.InputCity(chatId);
+            return ConsoleCommandUI.InputCity();
         }
 
         String encodedQuery = URLEncoder.encode(arguments, StandardCharsets.UTF_8).replace("%2C", ",");
-        WeatherUI weather = new WeatherUI(WeatherService.CreateDTO(GetWeatherWithApi.GetWeatherInfo(encodedQuery,1,chatId),chatId));
-        return weather.toLocalzedString(chatId);
+        WeatherUI weather = new WeatherUI(WeatherService.CreateDTO(GetWeatherWithApi.GetWeatherInfo(encodedQuery, 1)));
+        return weather.toString();
     }
 }
