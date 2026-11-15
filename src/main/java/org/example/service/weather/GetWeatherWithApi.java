@@ -1,7 +1,6 @@
 package org.example.service.weather;
 
 import org.example.model.env.EnvConfig;
-import org.example.ui.LanguageManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,16 +14,13 @@ public class GetWeatherWithApi {
 
     private static final Logger logger = LoggerFactory.getLogger(GetWeatherWithApi.class);
 
-    public static HttpResponse<String> GetWeatherInfo(String encodedCity, int daysToRequest, Long chatId) {
-
+    public static HttpResponse<String> GetWeatherInfo(String encodedCity, int daysToRequest) {
         String apiKey = EnvConfig.getInstance().getApiWeather();
-        String lang = LanguageManager.getLangCode(chatId);
-
         try {
             String url = "http://api.weatherapi.com/v1/forecast.json?key=" + apiKey
                     + "&q=" + encodedCity
                     + "&days=" + daysToRequest
-                    + "&lang=" + lang;
+                    + "&lang=ru";
 
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()

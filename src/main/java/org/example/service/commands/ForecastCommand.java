@@ -19,9 +19,9 @@ public class ForecastCommand implements CommandExecute {
     }
 
     @Override
-    public String execute(String arguments,Long chatId) {
+    public String execute(String arguments) {
         if (arguments.isEmpty()) {
-            return ConsoleCommandUI.InputCityAndDays(chatId);
+            return ConsoleCommandUI.InputCityAndDays();
         }
 
         int lastSpaceIndex = arguments.lastIndexOf(" ");
@@ -34,7 +34,7 @@ public class ForecastCommand implements CommandExecute {
             try {
                 days = Integer.parseInt(dayStr);
                 if (days < 0 || days > 3) {
-                    return ConsoleCommandUI.IncorrectDay(chatId);
+                    return ConsoleCommandUI.IncorrectDay();
                 }
             } catch (NumberFormatException e) {
                 city = arguments;
@@ -43,15 +43,15 @@ public class ForecastCommand implements CommandExecute {
             city = arguments;
         }
         String encodedCity = URLEncoder.encode(city, StandardCharsets.UTF_8);
-        var response = GetWeatherWithApi.GetWeatherInfo(encodedCity, days,chatId);
+        var response = GetWeatherWithApi.GetWeatherInfo(encodedCity, days);
 
-        List<org.example.model.WeatherObjects.WeatherDTO> dtoList = WeatherService.CreateForecastList(response,chatId);
+        List<org.example.model.WeatherObjects.WeatherDTO> dtoList = WeatherService.CreateForecastList(response);
 
         StringBuilder result = new StringBuilder();
 
         for (org.example.model.WeatherObjects.WeatherDTO dto : dtoList) {
             WeatherUI weather = new WeatherUI(dto);
-            result.append(weather.toLocalzedString(chatId)).append("\n\n");
+            result.append(weather).append("\n\n");
         }
         return result.toString();
     }
