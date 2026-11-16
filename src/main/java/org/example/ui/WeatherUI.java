@@ -20,12 +20,11 @@ public class WeatherUI {
         date = dto.date();
     }
 
-    @Override
-    public String toString() {
-        return "Дата: " + date + "\n" +
-                " Статистика для города: " + city + "\n" +
-                " Температура в среднем: " + avgTemp + "°C\n" +
-                " Влажность: " + humidity + "%\n" +
-                " На улице: " + conditionText + "\n";
+    public String toLocalzedString(Long chatId) {
+        return LanguageManager.getText(chatId, "date") + date + "\n" +
+                LanguageManager.getText(chatId, "static") + city + "\n" +
+                LanguageManager.getText(chatId, "temperature") + avgTemp + "°C\n" +
+                LanguageManager.getText(chatId, "humidity") + humidity + "%\n" +
+                LanguageManager.getText(chatId, "street") + conditionText + "\n";
     }
 }

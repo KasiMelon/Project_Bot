@@ -4,5 +4,6 @@ package org.example.service.commands;
 public interface CommandExecute {
     boolean match(String input);
 
-    String execute(String arguments);
+    String execute(String arguments,Long chatId);
+
 }

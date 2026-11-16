@@ -13,8 +13,8 @@ public class ExitCommand implements CommandExecute {
     }
 
     @Override
-    public String execute(String arguments) {
+    public String execute(String arguments,Long chatId) {
         logger.info("Чат-бот успешно выполнил все команды пользователя");
-        return ConsoleCommandUI.ExitInfo();
+        return ConsoleCommandUI.ExitInfo(chatId);
     }
 }

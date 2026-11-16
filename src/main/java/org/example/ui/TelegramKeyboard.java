@@ -9,11 +9,30 @@ import java.util.List;
 
 public class TelegramKeyboard {
 
-    public static ReplyKeyboardMarkup getMainMenu() {
+    public static ReplyKeyboardMarkup getLanguage() {
+        List<KeyboardRow> keyboardRows = new ArrayList<>();
+
+        KeyboardRow row1 = new KeyboardRow();
+        row1.add(new KeyboardButton("Русский/Russian"));
+        row1.add(new KeyboardButton("Английский/English"));
+
+        keyboardRows.add(row1);
+
+        return ReplyKeyboardMarkup.builder()
+                .keyboard(keyboardRows)
+                .resizeKeyboard(true)
+                .build();
+
+    }
+
+    public static ReplyKeyboardMarkup getMainMenu(long chatId) {
         List<KeyboardRow> keyboardRows = new ArrayList<>();
 
         KeyboardRow locationRow = new KeyboardRow();
-        KeyboardButton locationButton = new KeyboardButton("Погода по геолокации");
+
+        String locationtext = LanguageManager.getText(chatId, "weather_geo");
+        KeyboardButton locationButton = new KeyboardButton(locationtext);
+
         locationButton.setRequestLocation(true);
         locationRow.add(locationButton);
 
@@ -36,19 +55,19 @@ public class TelegramKeyboard {
                 .build();
     }
 
-    public static ReplyKeyboardMarkup getCityKeyboard() {
+    public static ReplyKeyboardMarkup getCityKeyboard(long chatId) {
         List<KeyboardRow> keyboardRows = new ArrayList<>();
 
         KeyboardRow row1 = new KeyboardRow();
-        row1.add(new KeyboardButton("Москва"));
-        row1.add(new KeyboardButton("Санкт-Петербург"));
+        row1.add(new KeyboardButton(LanguageManager.getText(chatId, "city.moscow")));
+        row1.add(new KeyboardButton(LanguageManager.getText(chatId, "city.saint_petersburg")));
 
         KeyboardRow row2 = new KeyboardRow();
-        row2.add(new KeyboardButton("Екатеринбург"));
-        row2.add(new KeyboardButton("Казань"));
+        row2.add(new KeyboardButton(LanguageManager.getText(chatId, "city.ekaterinburg")));
+        row2.add(new KeyboardButton(LanguageManager.getText(chatId, "city.kazan")));
 
         KeyboardRow row3 = new KeyboardRow();
-        row3.add(new KeyboardButton("назад"));
+        row3.add(new KeyboardButton(LanguageManager.getText(chatId, "button.back")));
 
         keyboardRows.add(row1);
         keyboardRows.add(row2);
@@ -60,7 +79,7 @@ public class TelegramKeyboard {
                 .build();
     }
 
-    public static ReplyKeyboardMarkup getDaysKeyboard() {
+    public static ReplyKeyboardMarkup getDaysKeyboard(long chatId) {
         List<KeyboardRow> keyboardRows = new ArrayList<>();
 
         KeyboardRow row1 = new KeyboardRow();
@@ -69,7 +88,7 @@ public class TelegramKeyboard {
         row1.add(new KeyboardButton("3"));
 
         KeyboardRow row2 = new KeyboardRow();
-        row2.add(new KeyboardButton("назад"));
+        row2.add(new KeyboardButton(LanguageManager.getText(chatId,"button.back")));
 
         keyboardRows.add(row1);
         keyboardRows.add(row2);

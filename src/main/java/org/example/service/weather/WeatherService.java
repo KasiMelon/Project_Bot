@@ -18,10 +18,10 @@ public class WeatherService {
 
     private static final Logger logger = LoggerFactory.getLogger(WeatherService.class);
 
-    public static WeatherDTO CreateDTO(HttpResponse<String> response) {
+    public static WeatherDTO CreateDTO(HttpResponse<String> response,Long chatId) {
         if (response == null) {
             logger.error("Ошибка связи с сервером");
-            throw new RuntimeException(ConsoleCommandUI.ErrorNetwork());
+            throw new RuntimeException(ConsoleCommandUI.ErrorNetwork(chatId));
         }
         if (response.statusCode() == 200) {
 
@@ -44,17 +44,17 @@ public class WeatherService {
 
         } else if (response.statusCode() == 400 || response.statusCode() == 404) {
             logger.error("Введено неверное название города");
-            throw new RuntimeException(ConsoleCommandUI.IncorrectCity());
+            throw new RuntimeException(ConsoleCommandUI.IncorrectCity(chatId));
         } else {
             logger.error("Возникла неполадка {}", response.statusCode());
-            throw new RuntimeException(ConsoleCommandUI.ErrorServer() + response.statusCode() + ").");
+            throw new RuntimeException(ConsoleCommandUI.ErrorServer(chatId) + response.statusCode() + ").");
         }
     }
 
-    public static List<WeatherDTO> CreateForecastList(HttpResponse<String> response) {
+    public static List<WeatherDTO> CreateForecastList(HttpResponse<String> response,Long chatId) {
         if (response == null) {
             logger.error("Ошибка связи с сервером");
-            throw new RuntimeException(ConsoleCommandUI.ErrorNetwork());
+            throw new RuntimeException(ConsoleCommandUI.ErrorNetwork(chatId));
         }
         if (response.statusCode() == 200) {
 
@@ -84,10 +84,10 @@ public class WeatherService {
 
         } else if (response.statusCode() == 400 || response.statusCode() == 404) {
             logger.error("Введено неверное название города");
-            throw new RuntimeException(ConsoleCommandUI.IncorrectCity());
+            throw new RuntimeException(ConsoleCommandUI.IncorrectCity(chatId));
         } else {
             logger.error("Возникла неполадка {}", response.statusCode());
-            throw new RuntimeException(ConsoleCommandUI.ErrorServer() + response.statusCode() + ").");
+            throw new RuntimeException(ConsoleCommandUI.ErrorServer(chatId) + response.statusCode() + ").");
         }
     }
 }
